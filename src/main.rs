@@ -9,7 +9,8 @@ use axum::{
     routing::get,
     extract::Path,
     response::Redirect,
-    Json, 
+    http::Uri,
+    Json,
     Router,
 };
 use serde::Serialize;
@@ -56,7 +57,7 @@ async fn main() {
 
     // Initialize tracing...
     let subscriber = tracing_subscriber::fmt()
-        .with_max_level(Level::DEBUG)
+        .with_max_level(Level::INFO)
         .compact()
         .with_target(false)
         .finish();
@@ -69,6 +70,7 @@ async fn main() {
         .route("/_ping", get(ping))
         .route("/_all", get(get_all_links))
         .route("/:key", get(get_link))
+        .fallback(global_404)
         .layer(
             TraceLayer::new_for_http()
                 .on_response(trace::DefaultOnResponse::new().level(Level::INFO)),
@@ -118,13 +120,13 @@ async fn get_all_links() -> Json<Value> {
 }
 
 /// Returns a redirect to the link associated with the given key.
-async fn get_link(key: Path<String>) -> Redirect {
+async fn get_link(Path(key): Path<String>) -> Redirect {
     // Get the key from the path and convert it to lowercase...
-    let k = &*key.to_lowercase();
+    let k = key.to_lowercase();
     tracing::debug!("Got request for key: {}", k);
 
     // Check if the key exists in the links map, if not use the default link...
-    let link = match LINKS.get(k) {
+    let link = match LINKS.get(k.as_str()) {
         Some(link) => {
             tracing::debug!("Found link: {}", link);
             link.clone()
@@ -137,4 +139,9 @@ async fn get_link(key: Path<String>) -> Redirect {
 
     // Return a redirect to the link...
     Redirect::temporary(link)
+}
+
+async fn global_404(uri: Uri) -> Redirect {
+    tracing::info!("404: Path \"{}\" not found", uri);
+    Redirect::temporary(DEFAULT_LINK)
 }
