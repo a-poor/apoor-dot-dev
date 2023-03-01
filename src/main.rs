@@ -141,6 +141,7 @@ async fn get_link(Path(key): Path<String>) -> Redirect {
     Redirect::temporary(link)
 }
 
+/// The global 404 handler, redirects to the default link and logs the path.
 async fn global_404(uri: Uri) -> Redirect {
     tracing::info!("404: Path \"{}\" not found", uri);
     Redirect::temporary(DEFAULT_LINK)
