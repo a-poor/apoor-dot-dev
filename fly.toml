@@ -14,7 +14,7 @@ APP_PORT = "80"
 
 [[services]]
   http_checks = []
-  internal_port = 8080
+  internal_port = 80
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
@@ -24,13 +24,13 @@ APP_PORT = "80"
     type = "connections"
 
   [[services.ports]]
-    force_https = false
+    force_https = true
     handlers = ["http"]
     port = 80
 
-  # [[services.ports]]
-  #   handlers = ["tls", "http"]
-  #   port = 443
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
 
   [[services.tcp_checks]]
     grace_period = "1s"
