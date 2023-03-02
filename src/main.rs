@@ -1,10 +1,7 @@
-// #![allow(unused_imports)]
-// #![allow(unused_variables)]
-#![allow(dead_code)]
-
 use std::net::SocketAddr;
 use std::collections::HashMap;
-
+use serde::Serialize;
+use serde_json::{json, Value};
 use axum::{
     routing::get,
     extract::Path,
@@ -13,8 +10,6 @@ use axum::{
     Json,
     Router,
 };
-use serde::Serialize;
-use serde_json::{json, Value};
 use tracing::Level;
 use tower_http::trace::{self, TraceLayer};
 
@@ -28,8 +23,12 @@ static DEFAULT_LINK: &'static str = "https://austinpoor.com";
 lazy_static! {
     /// The mapping of keys to redirect links.
     static ref LINKS: HashMap<&'static str, &'static str> = HashMap::from([
+        // The github repo for this article...
+        ("this", "https://github.com/a-poor/apoor-dot-dev"),
+        
         // Personal site links...
         ("site", "https://austinpoor.com"),
+        ("home", "https://austinpoor.com"),
         ("blog", "https://austinpoor.com/blog"),
         ("about", "https://austinpoor.com/about"),
         ("projects", "https://austinpoor.com/projects"),
@@ -83,9 +82,8 @@ async fn main() {
 
     // Initialize tracing...
     let subscriber = tracing_subscriber::fmt()
-        .with_max_level(Level::INFO)
+        .with_max_level(Level::DEBUG)
         .compact()
-        .with_target(false)
         .finish();
     tracing::subscriber::set_global_default(subscriber).unwrap();
     tracing::info!("Starting...");
@@ -169,6 +167,6 @@ async fn get_link(Path(key): Path<String>) -> Redirect {
 
 /// The global 404 handler, redirects to the default link and logs the path.
 async fn global_404(uri: Uri) -> Redirect {
-    tracing::info!("404: Path \"{}\" not found", uri);
+    tracing::debug!("404: Path \"{}\" not found", uri);
     Redirect::temporary(DEFAULT_LINK)
 }
