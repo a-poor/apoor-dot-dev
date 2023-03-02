@@ -28,15 +28,41 @@ static DEFAULT_LINK: &'static str = "https://austinpoor.com";
 lazy_static! {
     /// The mapping of keys to redirect links.
     static ref LINKS: HashMap<&'static str, &'static str> = HashMap::from([
+        // Personal site links...
         ("site", "https://austinpoor.com"),
         ("blog", "https://austinpoor.com/blog"),
         ("about", "https://austinpoor.com/about"),
         ("projects", "https://austinpoor.com/projects"),
+        ("email", "mailto:hello@austinpoor.com"),
+        
+        // Social links...
         ("github", "https://github.com/a-poor"),
         ("mastodon", "https://mastodon.social/@austinpoor"),
         ("twitter", "https://twitter.com/austin_poor"),
         ("linkedin", "https://linkedin.com/in/austinpoor"),
         ("medium", "https://medium.com/@apoor"),
+        ("docker", "https://hub.docker.com/u/austinpoor"),
+        
+        // Blog posts...
+        ("color-palettes", "https://austinpoor.com/blog/algorithmic-color-palettes"),
+        ("color-palettes-blog", "https://austinpoor.com/blog/algorithmic-color-palettes"),
+        ("spotify", "https://austinpoor.com/blog/predict-spotify-skips"),
+        ("spotify-skip", "https://austinpoor.com/blog/predict-spotify-skips"),
+        ("spotify-skip-blog", "https://austinpoor.com/blog/predict-spotify-skips"),
+        ("ml-grpc", "https://austinpoor.com/blog/serve-ml-with-grpc"),
+        ("ml-flask", "https://austinpoor.com/blog/flask-ml-predictions"),
+        ("big-query", "https://austinpoor.com/blog/big-query-data-augmentation"),
+        ("ds-profile", "https://austinpoor.com/blog/data-science-profilers"),
+        ("jinja-plot", "https://austinpoor.com/blog/plots-with-jinja"),
+        ("csv-pg", "https://austinpoor.com/blog/csv-to-postgres-with-pandas"),
+        
+        // Projects...
+        ("short-link-code", "https://github.com/a-poor/apoor-dot-dev"),
+        ("site-code", "https://github.com/a-poor/austinpoor-dot-com"),
+        ("vhttp", "https://github.com/a-poor/austinpoor-dot-com"),
+        ("color-palettes-code", "https://github.com/a-poor/color-palettes"),
+        ("spotify-code", "https://github.com/a-poor/spotify-skip-prediction"),
+        ("spotify-skip-code", "https://github.com/a-poor/spotify-skip-prediction"),
     ]);
 }
 
