@@ -169,7 +169,7 @@ async fn get_link(Path(key): Path<String>) -> Redirect {
     };
 
     // Return a redirect to the link...
-    Redirect::temporary(format!("{}?{}", link, UTM_PARAMS))
+    Redirect::temporary(format!("{}?{}", link, UTM_PARAMS).as_ref())
 }
 
 /// The global 404 handler, redirects to the default link and logs the path.
