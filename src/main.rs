@@ -20,6 +20,12 @@ extern crate lazy_static;
 /// The default link to redirect to if no link is found for the given key.
 static DEFAULT_LINK: &'static str = "https://austinpoor.com";
 
+/// The UTM parameters to append to all (valid) redirects.
+/// 
+/// TODO: Maybe this should be limited to only redirects to my own site?
+static UTM_PARAMS: &'static str = "utm_source=apoor.dev&utm_medium=redirect&utm_campaign=apoor.dev";
+
+
 lazy_static! {
     /// The mapping of keys to redirect links.
     static ref LINKS: HashMap<&'static str, &'static str> = HashMap::from([
@@ -33,6 +39,7 @@ lazy_static! {
         ("about", "https://austinpoor.com/about"),
         ("projects", "https://austinpoor.com/projects"),
         ("email", "mailto:hello@austinpoor.com"),
+        ("rss", "https://austinpoor.com/rss.xml"),
         
         // Social links...
         ("github", "https://github.com/a-poor"),
@@ -162,7 +169,7 @@ async fn get_link(Path(key): Path<String>) -> Redirect {
     };
 
     // Return a redirect to the link...
-    Redirect::temporary(link)
+    Redirect::temporary(format!("{}?{}", link, UTM_PARAMS))
 }
 
 /// The global 404 handler, redirects to the default link and logs the path.
