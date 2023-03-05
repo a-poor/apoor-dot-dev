@@ -20,11 +20,10 @@ extern crate lazy_static;
 /// The default link to redirect to if no link is found for the given key.
 static DEFAULT_LINK: &'static str = "https://austinpoor.com";
 
-/// The UTM parameters to append to all (valid) redirects.
+/// The ref parameter to append to all (valid) redirects.
 /// 
 /// TODO: Maybe this should be limited to only redirects to my own site?
-static UTM_PARAMS: &'static str = "utm_source=apoor.dev&utm_medium=redirect&utm_campaign=apoor.dev";
-
+static REF_PARAM: &'static str = "ref=apoor-dot-dev";
 
 lazy_static! {
     /// The mapping of keys to redirect links.
@@ -120,7 +119,8 @@ async fn main() {
 
 /// The root route, redirects to the default link.
 async fn root() -> Redirect {
-    Redirect::temporary(DEFAULT_LINK)
+    let url = format!("{}?{}", DEFAULT_LINK, REF_PARAM);
+    Redirect::temporary(url.as_ref())
 }
 
 /// The ping route, returns a JSON object with a success field.
@@ -169,7 +169,7 @@ async fn get_link(Path(key): Path<String>) -> Redirect {
     };
 
     // Return a redirect to the link...
-    Redirect::temporary(format!("{}?{}", link, UTM_PARAMS).as_ref())
+    Redirect::temporary(format!("{}?{}", link, REF_PARAM).as_ref())
 }
 
 /// The global 404 handler, redirects to the default link and logs the path.
