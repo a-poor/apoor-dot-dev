@@ -68,6 +68,7 @@ lazy_static! {
         ("color-palettes-code", "https://github.com/a-poor/color-palettes"),
         ("spotify-code", "https://github.com/a-poor/spotify-skip-prediction"),
         ("spotify-skip-code", "https://github.com/a-poor/spotify-skip-prediction"),
+        ("watercooler", "https://github.com/a-poor/watercooler"),
     ]);
 }
 
