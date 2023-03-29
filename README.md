@@ -37,7 +37,7 @@ The binary is a bit larger than I would have expected (currently `~2.5MB`). I wo
 
 ## Load Testing
 
-![k6 results screenshot](./etc/k6-screenshot.png)
+![k6 results screenshot](./etc/load-test-demo.gif)
 
 Since I had a new API up and running, I wanted to get a better sense of its performance. I've included a [k6](https://k6.io) load-testing script in the [load-test](./load-test/) directory.
 
