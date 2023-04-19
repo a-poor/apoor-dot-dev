@@ -5,11 +5,11 @@ RUN cargo build --release
 
 
 FROM scratch
-COPY --from=build /app/target/release/apoor-dot-dev .
+COPY --from=build /app/target/release/apoor-dot-dev /apoor-dot-dev
 
 ENV APP_HOST=0.0.0.0
 ENV APP_PORT=80
 
 EXPOSE 80
 
-CMD [ "./apoor-dot-dev" ]
+ENTRYPOINT [ "/apoor-dot-dev" ]
