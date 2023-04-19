@@ -1,5 +1,6 @@
 FROM rust:1-alpine3.16 AS build
 WORKDIR /app
+RUN apk add --update alpine-sdk
 COPY . .
 RUN cargo build --release
 
