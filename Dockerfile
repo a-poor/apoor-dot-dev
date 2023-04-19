@@ -4,8 +4,7 @@ COPY . .
 RUN cargo build --release
 
 
-FROM debian:buster-slim
-WORKDIR /app
+FROM scratch
 COPY --from=build /app/target/release/apoor-dot-dev .
 
 ENV APP_HOST=0.0.0.0
