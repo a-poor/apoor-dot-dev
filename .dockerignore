@@ -2,3 +2,9 @@
 target
 fly.toml
 .git
+load-test
+etc
+.github
+Dockerfile
+docker-compose.yaml
+*.tape
