@@ -1,10 +1,10 @@
-FROM rust AS build
+FROM rust:1-alpine3.6 AS build
 WORKDIR /app
 COPY . .
 RUN cargo build --release
 
 
-FROM scratch
+FROM alpine:3.6
 COPY --from=build /app/target/release/apoor-dot-dev /apoor-dot-dev
 
 ENV APP_HOST=0.0.0.0
