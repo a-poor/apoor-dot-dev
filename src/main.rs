@@ -47,6 +47,8 @@ lazy_static! {
         ("linkedin", "https://linkedin.com/in/austinpoor"),
         ("medium", "https://medium.com/@apoor"),
         ("docker", "https://hub.docker.com/u/austinpoor"),
+        ("bluesky", "https://bsky.app/profile/imaustin.bsky.social"),
+        ("bsky", "https://bsky.app/profile/imaustin.bsky.social"),
         
         // Blog posts...
         ("color-palettes", "https://austinpoor.com/blog/algorithmic-color-palettes"),
