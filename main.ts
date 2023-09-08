@@ -1,8 +1,18 @@
-export function add(a: number, b: number): number {
-  return a + b;
+
+
+function createHandler(): Deno.ServeHandler {
+  return (req, res) => {
+    const url = new URL(req.url);
+    console.log(url);
+    return new Response("Hello, World!");
+  };
 }
 
-// Learn more at https://deno.land/manual/examples/module_metadata#concepts
+
+// Run the server if this file is run as a script...
 if (import.meta.main) {
-  console.log("Add 2 + 3 =", add(2, 3));
+  Deno.serve(
+    {},
+    createHandler(),
+  );
 }
