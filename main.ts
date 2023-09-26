@@ -6,7 +6,7 @@ import { kvData } from "./data.ts";
 const app = new Hono();
 app.use("*", logger());
 
-app.get("/", (c) => c.redirect("https://austinpoor.com", 302));
+app.get("/", (c) => c.redirect("https://austinpoor.com", 301));
 app.get("/admin/*", (c) => c.notFound());
 app.get("/_ping", (c) => c.json({ success: true }));
 app.get("/_all", (c) => c.json(Object.values(kvData).map(d => ({key: d.key, link: d.link}))));
@@ -30,7 +30,7 @@ app.get("/:key", (c) => {
     url.searchParams.set("utm_source", "austinpoor.com");
   }
 
-  return c.redirect(url.toString(), 302);
+  return c.redirect(url.toString(), 301);
 });
 
 // Run the server if this file is run as a script...
