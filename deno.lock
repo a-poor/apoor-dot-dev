@@ -1,5 +1,5 @@
 {
-  "version": "3",
+  "version": "2",
   "redirects": {
     "https://deno.land/x/hono/mod.ts": "https://deno.land/x/hono@v3.7.2/mod.ts"
   },
