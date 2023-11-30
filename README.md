@@ -2,8 +2,7 @@
 
 _created by Austin Poor_
 
-A custom URL shortener for my personal use – build with Deno and
-Hono and deployed to Deno Deploy.
+A custom URL shortener – build with Deno and Hono and deployed to Deno Deploy.
 
 The previous version of this app was writtin in Rust and deployed to Fly.io.
 
