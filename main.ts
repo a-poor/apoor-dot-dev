@@ -44,9 +44,9 @@ app.get("/:key", (c) => {
 
 // Run the server if this file is run as a script...
 if (import.meta.main) {
-  Deno.cron("Ping self", "0 6 * * 0", () => {
+  Deno.cron("Ping self", "0 6 * * MON", () => {
     fetch("https://apoor.dev/_ping")
-      .then(() => console.log("Pinged self"))
+      .then(() => console.log("Ping successful."))
       .catch(err => console.error("Failed to ping self. err =", err));
   });
 
